@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    
+   <h:head>
+        <title>Agregando Persona</title>
+        <style type="text/css">
+            .errors{
+                color:purple;
+                font-weight:bold;
+            }
+        </style>
+    </h:head>
+    <h:body>
+        <h:form id="form">
+            
+            <h:messages id="messages" class="errors"/>
+            
+            <h:panelGrid id="panelGrid" columns="3">
+                <h:outputLabel for="nombreImputText" value="Nombre:"/>
+                <h:inputText id="nombreInputText" value="#{personaManagedBean2.persona.nombre}"/>
+                <h:message for ="nombreInputText" class="errors"/>
+                
+                <h:outputLabel for="apellidoImputText" value="Apellido:"/>
+                <h:inputText id="apellidoInputText" value="#{personaManagedBean2.persona.apellido}"/>
+                <h:message for ="apellidoInputText" class="errors"/>
+                
+                <h:outputLabel for="edadImputText" value="Edad:"/>
+                <h:inputText id="edadInputText" value="#{personaManagedBean2.persona.edad}"/>
+                <h:message for ="edadInputText" class="errors"/>
+                
+            </h:panelGrid>
+            
+            <h:commandButton value="Enviar">
+                <f:ajax execute="form"
+                        listener="#{personaManagedBean2.agregarPersona()}"
+                        render="conjunto messages panelGrid" />
+            </h:commandButton>
+            
+            <div>
+                <h:dataTable id="conjunto" value="#{personaManagedBean2.list}" var="sujeto">
+                    <h:column> 
+                        <f:facet name ="header">Name  </f:facet>
+                        #{sujeto.nombre}
+                    </h:column>:
+                
+                    <h:column> 
+                        <f:facet name ="header">Apellido</f:facet>
+                        #{sujeto.apellido}
+                    </h:column>:
+
+                    <h:column> 
+                        <f:facet name ="header">Edad</f:facet>
+                        #{sujeto.edad}
+                    </h:column>:
+                </h:dataTable>                
+            </div>
+        </h:form>
+    </h:body>
+</html>
+

@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Formulario JSF</title>
+        <style type="text/css">
+            .errors{
+                color:red;
+                font-weight:bold;
+            }
+        </style>
+    </h:head>
+    <h:body>
+        <h:link value ="Agregando Persona" outcome="agregar-persona"/>
+        <h:form id="form">
+            
+            <h:messages id="messages" class="errors"/>
+            
+            <h:panelGrid id="panelGrid" columns="3">
+                <h:outputLabel for="nombreImputText" value="Nombre:"/>
+                <h:inputText id="nombreInputText" value="#{personaManagedBean.persona.nombre}"/>
+                <h:message for ="nombreInputText" class="errors"/>
+                
+                <h:outputLabel for="apellidoImputText" value="Apellido:"/>
+                <h:inputText id="apellidoInputText" value="#{personaManagedBean.persona.apellido}"/>
+                <h:message for ="apellidoInputText" class="errors"/>
+                
+                <h:outputLabel for="edadImputText" value="Edad:"/>
+                <h:inputText id="edadInputText" value="#{personaManagedBean.persona.edad}"/>
+                <h:message for ="edadInputText" class="errors"/>
+                
+            </h:panelGrid>
+            
+            <h:commandButton value="Enviar">
+                <f:ajax execute="form"
+                        listener="#{personaManagedBean.crearMensaje()}"
+                        render="mensajeOutputText messages panelGrid" />
+            </h:commandButton>
+            
+            <div>
+                <h:outputText id="mensajeOutputText" value="#{personaManagedBean.mensaje}"/>
+            </div>
+        </h:form>
+    </h:body>
+</html>
+
